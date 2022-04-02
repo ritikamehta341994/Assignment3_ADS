@@ -148,6 +148,10 @@ public class Main {
 			System.out.println("\t\t"+processedElements+"\t\t|\t\t"+(double)(timeToInsertInPq/numberOfIterations));
 		}
 		
+		if(operation == 1) {
+			//For Operation 1, remove the minimum value element from the priority queue and display the next minimimum value element
+			removeMinFromPQ(priorityQueue);
+		}
 		//re-initialize the hashmap for the Adaptable priority queue
 		refinedListOfCrimeIncidentsForZipMap = new HashMap<>();
 		//re-initialize the processed elements count for the Adaptable priority queue
@@ -195,8 +199,13 @@ public class Main {
 			System.out.println("\t\t"+processedElements+"\t\t|\t\t"+(double)(timeToInsertInAdaptablePq/numberOfIterations));
 		}
 				
-		refinedListOfCrimeIncidentsForZipMap = new HashMap<>();
+		if(operation == 1) {
+			removeMinFromPQ(adaptablePq);			
+		}
 		
+		//re-initialize the hashmap for the Sorted priority queue
+		refinedListOfCrimeIncidentsForZipMap = new HashMap<>();
+		//re-initialize the processed elements count for the Sorted priority queue
 		processedElements = 0;
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("\t\t\tSorted Priority Queue\n");
@@ -241,8 +250,14 @@ public class Main {
 			System.out.println("\t\t"+processedElements+"\t\t|\t\t"+(double)(timeToInsertInSortedPq/numberOfIterations));
 
 		}
-
+		if(operation == 1) {
+			//For Operation 1, remove the minimum value element from the sorted priority queue and display the next minimimum value element
+			removeMinFromPQ(sortedPq);
+		}
+		
+		//re-initialize the hashmap for the Unsorted priority queue
 		refinedListOfCrimeIncidentsForZipMap = new HashMap<>();
+		//re-initialize the processed elements count for the Unsorted priority queue
 		processedElements = 0;
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("\t\t\tUnsorted Priority Queue\n");
@@ -283,14 +298,6 @@ public class Main {
 		}
 		
 		if(operation == 1) {
-			
-			System.out.println("--------------------------------------------------------------------------------------------------------------------");
-			//For Operation 1, remove the minimum value element from the priority queue and display the next minimimum value element
-			removeMinFromPQ(priorityQueue);
-			//For Operation 1, remove the minimum value element from the adaptable priority queue and display the next minimimum value element
-			removeMinFromPQ(adaptablePq);
-			//For Operation 1, remove the minimum value element from the sorted priority queue and display the next minimimum value element
-			removeMinFromPQ(sortedPq);
 			//For Operation 1, remove the minimum value element from the unsorted priority queue and display the next minimimum value element
 			removeMinFromPQ(unsortedPq);
 		}
@@ -471,8 +478,9 @@ public class Main {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("\t\t\tUnsorted Priority Queue");
 		System.out.println("------------------------------------------------------------------------");
-		
+		//re-initialize the hashmap for the unsorted priority queue
 		refinedListOfCrimeIncidentsForZipMap = new HashMap<>();
+		//re-initialize the number of processed Elements for the unsorted priority queue
 		processedElements = 0;
 		
 		System.out.println("Number of element\t\t|\t\tTime Taken");
@@ -554,10 +562,11 @@ public class Main {
 	 * Removes the minimum element and displays the new minimum
 	 */
 	private static void removeMinFromPQ(HeapPriorityQueue<Integer,LinkedList<CrimeIncidents>> priorityQueue) {
+		System.out.println("--------------------------------------------------------------------------------------------------------------------");
+
 		System.out.println("Removing Zip Code :"+priorityQueue.min().getValue().get(0).getZipCode()+" with minimum crime incidents from Priority Queue"
 				+"| Number of Crime Incidents : "+priorityQueue.min().getKey());
-		System.out.println("--------------------------------------------------------------------------------------------------------------------");
-		priorityQueue.removeMin();
+				priorityQueue.removeMin();
 		System.out.println("New Zip Code with minimum crime incidents : "+priorityQueue.min().getValue().get(0).getZipCode()+" | Number of Crime Incidents :"+priorityQueue.min().getKey());
 		
 	}
@@ -570,7 +579,6 @@ public class Main {
 		System.out.println("--------------------------------------------------------------------------------------------------------------------");
 		System.out.println("Removing Zip Code :"+adaptablePq.min().getValue().get(0).getZipCode()+" with minimum crime incidents from Adaptable Priority Queue"
 				+"| Number of Crime Incidents : "+adaptablePq.min().getKey());
-		System.out.println("--------------------------------------------------------------------------------------------------------------------");
 		adaptablePq.removeMin();
 		System.out.println("New Zip Code with minimum crime incidents : "+adaptablePq.min().getValue().get(0).getZipCode()+" | Number of Crime Incidents :"+adaptablePq.min().getKey());
 
@@ -584,7 +592,6 @@ public class Main {
 		System.out.println("Removing Zip Code :"+sortedPq.min().getValue().get(0).getZipCode()+" with minimum crime incidents from Sorted Priority Queue"
 				+"| Number of Crime Incidents : "+sortedPq.min().getKey());
 		sortedPq.removeMin();
-		System.out.println("--------------------------------------------------------------------------------------------------------------------");
 		System.out.println("New Zip Code with minimum crime incidents : "+sortedPq.min().getValue().get(0).getZipCode()+" | Number of Crime Incidents :"+sortedPq.min().getKey());
 	}
 	
@@ -597,7 +604,6 @@ public class Main {
 				" with minimum crime incidents from Unsorted Priority Queue"
 				+"| Number of Crime Incidents : "+unsortedPq.min().getKey());
 		unsortedPq.removeMin();
-		System.out.println("--------------------------------------------------------------------------------------------------------------------");
 		System.out.println("New Zip Code with minimum crime incidents : "+unsortedPq.min().getValue().get(0).getZipCode()+" | Number of Crime Incidents :"+unsortedPq.min().getKey());
 
 	}
